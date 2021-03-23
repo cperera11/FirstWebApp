@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.NameMessageService;
 
 /**
  *
@@ -33,7 +34,8 @@ public class NameMsgController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String nameEnterd = request.getParameter("userName");
-        String msg = "Hello " + nameEnterd + " welcome!";
+        NameMessageService nms = new NameMessageService();
+        String msg = nms.produceMessage(nameEnterd);
         request.setAttribute("nameMsg", msg);
         
         RequestDispatcher view = request.getRequestDispatcher("/response.jsp");
